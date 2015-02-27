@@ -1,0 +1,63 @@
+﻿<metadata>
+	<!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+ 
+	<!-- the following methods need to be public since they are referenced through out the API -->
+	<attr path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISMediaAdapter.MediaView.STATUS']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='MultiVertexGeometry']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.tasks.geocode']/class[@name='LocatorResult']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='MultiPathImpl']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='VertexDescription']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='MultiVertexGeometryImpl']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='AttributeStreamOfDbl']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='AttributeStreamOfInt8']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='AttributeStreamOfInt32']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='AttributeStreamBase']" name="visibility">public</attr>
+
+
+	<!-- fixes the issue where an method (n_GetItem_I) calls JNIEnv.NewString and passes an object as argument. This parameter should be 
+		 castet to a string. Therefore the required methods have to be implemented as partial classes
+	-->
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISEditAttributesAdapter.RangeSpinnerAdapter']/method[@name='getItem']" />
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISEditAttributesAdapter.CodedValueSpinnerAdapter']/method[@name='getItem']" />
+
+	<!-- this fixes issues with classes that don't implemented interface members due to wrong return type-->
+	<attr path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISAttachmentsAdapter']/method[@name='getItem']" name="managedReturn">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISEditAttributesAdapter.CodedValueSpinnerAdapter']/method[@name='getItem']" name="managedReturn">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISMediaAdapter']/method[@name='getItem']" name="managedReturn">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='get']" name="managedReturn">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='remove' and count(parameter)=1 and parameter[1][@type='int']]" name="managedReturn">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='add' and count(parameter)=1 and parameter[1][@type='com.esri.core.renderer.ColorRamp']]/parameter[@name='p0']" name="type">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='add' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='com.esri.core.renderer.ColorRamp']]/parameter[@name='p1']" name="type">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.symbol']/class[@name='MultiLayerSymbol']/method[@name='copy']" name="managedReturn">Com.Esri.Core.Symbol.ISymbol</attr>
+
+
+	<!-- this class is be marked as absolete in the android sdk -->
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/class[@name='ArcGISLayout']" />
+
+	<!-- fixed problem with getType() method. Since one can also use the GeometryType() method to get the geometry type it's removed  -->
+	<!--	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='Geometry']/method[@name='getType']" name="abstract">false</attr>-->
+	<remove-node path="/api/package[@name='com.esri.core.geometry']/class[@name='Geometry']/method[@name='getType']" />
+
+	<!-- need to rename getType() method in order to remove ambiguity -->
+	<attr path="/api/package[@name='com.esri.core.map.ogc.kml']/class[@name='KmlNode']/method[@name='getType' and count(parameter)=0]" name="managedName">GetNodeType</attr>
+	<attr path="/api/package[@name='com.esri.core.portal']/class[@name='WebMapLayer']/method[@name='getType' and count(parameter)=0]" name="managedName">GetThreshold</attr>
+	<attr path="/api/package[@name='com.esri.core.tasks.ags.query']/class[@name='OutStatistics']/method[@name='getType' and count(parameter)=0]" name="managedName">GetThreshold</attr>
+	<attr path="/api/package[@name='com.esri.core.tasks.query']/class[@name='OutStatistics']/method[@name='getType' and count(parameter)=0]" name="managedName">GetThreshold</attr>
+
+	<!-- solves issue with access level protection -->
+	<attr path="/api/package[@name='com.esri.core.geometry']/class[@name='MultiPathImpl']/method[@name='_notifyModifiedAllImpl']" name="visibility">protected</attr>
+
+	<!-- this fixes issues with methods that need a generic parameter type (i.e. due to error CS0535)-->
+	<attr path="/api/package[@name='com.esri.core.ogc.wmts']/class[@name='WMTSTileMatrixSet.TileMatrixComparator']/method[@name='compare' and count(parameter)=2 and parameter[1][@type='com.esri.core.ogc.wmts.WMTSTileMatrix'] and parameter[2][@type='com.esri.core.ogc.wmts.WMTSTileMatrix']]/parameter[1]" name="managedType">Java.Lang.Object</attr>
+	<attr path="/api/package[@name='com.esri.core.ogc.wmts']/class[@name='WMTSTileMatrixSet.TileMatrixComparator']/method[@name='compare' and count(parameter)=2 and parameter[1][@type='com.esri.core.ogc.wmts.WMTSTileMatrix'] and parameter[2][@type='com.esri.core.ogc.wmts.WMTSTileMatrix']]/parameter[2]" name="managedType">Java.Lang.Object</attr>
+
+	<!-- this fixes a conversion problem, which can not be done here, but needs to be implemented in a partial class (see AdditionalClasses) -->
+	<remove-node path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='subList' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]" />
+
+</metadata>
