@@ -9,9 +9,9 @@
     <RootNamespace>GEONIS.Runtime.JavaBindings</RootNamespace>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AssemblyName>GEONIS.Runtime.JavaBindings</AssemblyName>
-    <TargetFrameworkVersion>v4.4.87</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +44,7 @@
     <Compile Include="Additions\AdditionalClasses.cs" />
     <Compile Include="Additions\MultipartColorRamp.cs" />
     <Compile Include="Additions\ArcGISEditAttributesAdapter.cs" />
+    <Compile Include="Additions\OnStatusChangedEventDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Additions\AboutAdditions.txt" />

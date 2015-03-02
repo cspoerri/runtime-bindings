@@ -60,4 +60,10 @@
 	<!-- this fixes a conversion problem, which can not be done here, but needs to be implemented in a partial class (see AdditionalClasses) -->
 	<remove-node path="/api/package[@name='com.esri.core.renderer']/class[@name='MultipartColorRamp']/method[@name='subList' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]" />
 
+
+	<!-- fixes issues with packages which don't have a visiblity defined in the api.xml. Simplest solution (for now) was just remove the nodes -->
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/interface[@name='ArcGISAttachmentsAdapter.InternalAttachmentAdapterListener']" />
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/interface[@name='ArcGISMediaAdapter.MediaAdapterListener']" />
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/interface[@name='ArcGISMediaAdapter.MediaView.LoadStatusListener']" />
+	<remove-node path="/api/package[@name='com.esri.android.map.popup']/interface[@name='Popup.InternalPopupListener']" />
 </metadata>
