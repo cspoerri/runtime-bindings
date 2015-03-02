@@ -86,15 +86,4 @@
       <Name>Runtime.Bindings.Android</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <AndroidNativeLibrary Include="libs\x86\libruntimecore_java.so" />
-    <AndroidNativeLibrary Include="libs\x86\librs.main.so" />
-    <AndroidNativeLibrary Include="libs\x86\librender_script_analysis.so" />
-    <AndroidNativeLibrary Include="libs\armeabi-v7a\librender_script_analysis.so" />
-    <AndroidNativeLibrary Include="libs\armeabi-v7a\librs.main.so" />
-    <AndroidNativeLibrary Include="libs\armeabi-v7a\libruntimecore_java.so" />
-    <AndroidNativeLibrary Include="libs\armeabi\librender_script_analysis.so" />
-    <AndroidNativeLibrary Include="libs\armeabi\librs.main.so" />
-    <AndroidNativeLibrary Include="libs\armeabi\libruntimecore_java.so" />
-  </ItemGroup>
 </Project>
